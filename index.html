@@ -5,17 +5,23 @@
   <style> body { margin: 0; } </style>
 </head>
 <body>
-666
   <script>
     // 预定义10种脑电波样式参数
     const presets = [
-      { freq: [0.1, 0.3], amp: 50, color: [255,0,0] }, // 样式1
-      { freq: [0.2, 0.4], amp: 60, color: [0,0,255] }, // 样式2
-      // ... 继续定义8种样式
+      { freq: [0.1, 0.3], amp: 50, color: [255, 0, 0] },       // 样式1: 低频红色波
+      { freq: [0.2, 0.4], amp: 60, color: [0, 0, 255] },       // 样式2: 中频蓝色波
+      { freq: [0.3, 0.5], amp: 70, color: [0, 255, 0] },       // 样式3: 高频绿色波
+      { freq: [0.1, 0.5], amp: 80, color: [255, 255, 0] },     // 样式4: 混合频率黄色波
+      { freq: [0.4, 0.6], amp: 90, color: [255, 0, 255] },     // 样式5: 高频紫色波
+      { freq: [0.2, 0.6], amp: 100, color: [0, 255, 255] },    // 样式6: 中高频青色波
+      { freq: [0.1, 0.4], amp: 110, color: [128, 0, 128] },    // 样式7: 低频紫色波
+      { freq: [0.5, 0.7], amp: 120, color: [255, 165, 0] },    // 样式8: 高频橙色波
+      { freq: [0.3, 0.7], amp: 130, color: [128, 128, 128] },  // 样式9: 中高频灰色波
+      { freq: [0.2, 0.5], amp: 140, color: [75, 0, 130] }      // 样式10: 中频靛蓝色波
     ];
 
     // 随机选择一个预设
-    const preset = presets[Math.floor(Math.random() * 10)];
+    const preset = presets[Math.floor(Math.random() * presets.length)];
 
     function setup() {
       createCanvas(600, 200);
@@ -30,9 +36,9 @@
       for (let x = 0; x < width; x++) {
         let y = 0;
         preset.freq.forEach((freq, i) => {
-          y += sin(x * freq + frameCount * 0.1) * preset.amp/(i+1);
+          y += sin(x * freq + frameCount * 0.1) * preset.amp / (i + 1);
         });
-        vertex(x, height/2 + y);
+        vertex(x, height / 2 + y);
       }
       endShape();
     }
