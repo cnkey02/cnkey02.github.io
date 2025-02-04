@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <style> body { margin: 0; } </style>
+</head>
+<body>
+    123
+  <script>
+    // 预定义10种脑电波样式参数
+    const presets = [
+      { freq: [0.1, 0.3], amp: 50, color: [255,0,0] }, // 样式1
+      { freq: [0.2, 0.4], amp: 60, color: [0,0,255] }, // 样式2
+      // ... 继续定义8种样式
+    ];
+
+    // 随机选择一个预设
+    const preset = presets[Math.floor(Math.random() * 10)];
+
+    function setup() {
+      createCanvas(600, 200);
+      frameRate(30);
+    }
+
+    function draw() {
+      background(255);
+      noFill();
+      stroke(preset.color);
+      beginShape();
+      for (let x = 0; x < width; x++) {
+        let y = 0;
+        preset.freq.forEach((freq, i) => {
+          y += sin(x * freq + frameCount * 0.1) * preset.amp/(i+1);
+        });
+        vertex(x, height/2 + y);
+      }
+      endShape();
+    }
+  </script>
+</body>
+</html>
