@@ -6,56 +6,133 @@
     body {
       margin: 0;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
       background-color: black;
       color: white;
       font-family: Arial, sans-serif;
+      /* position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); */
     }
     canvas {
       border: 1px solid #333;
+      margin-bottom: 20px;
     }
     #waveform-info {
       position: absolute;
       top: 20px;
       left: 20px;
       font-size: 24px;
-      color: white;
+    }
+    #waveform-text {
+      font-size: 20px;
+      max-width: 600px;
+      text-align: center;
+      padding: 0 20px;
+      /* position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px; */
     }
   </style>
 </head>
 <body>
   <div id="waveform-info">波形编号: <span id="waveform-number">1</span></div>
+  <div id="waveform-text"></div>
   <script>
-    let t = 0; // 全局时间变量
-    const layers = []; // 存储多层波形参数
-    let currentWaveform = 0; // 当前波形编号
+    let t = 0;
+    const layers = [];
+    let currentWaveform = 0;
 
-    // 预定义10种波形参数
+    // 预定义10种波形及对应文本
     const presets = [
-      { freq: [0.02, 0.03, 0.04], amp: [50, 60, 70], speed: [0.02, 0.03, 0.04], hue: [0, 120, 240] }, // 波形1
-      { freq: [0.03, 0.04, 0.05], amp: [60, 70, 80], speed: [0.03, 0.04, 0.05], hue: [30, 150, 270] }, // 波形2
-      { freq: [0.04, 0.05, 0.06], amp: [70, 80, 90], speed: [0.04, 0.05, 0.06], hue: [60, 180, 300] }, // 波形3
-      { freq: [0.05, 0.06, 0.07], amp: [80, 90, 100], speed: [0.05, 0.06, 0.07], hue: [90, 210, 330] }, // 波形4
-      { freq: [0.06, 0.07, 0.08], amp: [90, 100, 110], speed: [0.06, 0.07, 0.08], hue: [120, 240, 360] }, // 波形5
-      { freq: [0.07, 0.08, 0.09], amp: [100, 110, 120], speed: [0.07, 0.08, 0.09], hue: [150, 270, 30] }, // 波形6
-      { freq: [0.08, 0.09, 0.10], amp: [110, 120, 130], speed: [0.08, 0.09, 0.10], hue: [180, 300, 60] }, // 波形7
-      { freq: [0.09, 0.10, 0.11], amp: [120, 130, 140], speed: [0.09, 0.10, 0.11], hue: [210, 330, 90] }, // 波形8
-      { freq: [0.10, 0.11, 0.12], amp: [130, 140, 150], speed: [0.10, 0.11, 0.12], hue: [240, 360, 120] }, // 波形9
-      { freq: [0.11, 0.12, 0.13], amp: [140, 150, 160], speed: [0.11, 0.12, 0.13], hue: [270, 30, 150] }, // 波形10
+      { 
+        freq: [0.02, 0.03, 0.04], 
+        amp: [50, 60, 70], 
+        speed: [0.02, 0.03, 0.04], 
+        hue: [0, 120, 240],
+        text: "α波 - 放松状态，闭眼时的平静脑波"
+      },
+      { 
+        freq: [0.03, 0.04, 0.05],
+        amp: [60, 70, 80],
+        speed: [0.03, 0.04, 0.05],
+        hue: [30, 150, 270],
+        text: "β波 - 专注状态，活跃思考时的脑波"
+      },
+      { 
+        freq: [0.04, 0.05, 0.06],
+        amp: [70, 80, 90],
+        speed: [0.04, 0.05, 0.06],
+        hue: [60, 180, 300],
+        text: "θ波 - 浅睡状态，创造性思维时的脑波" 
+      },
+      { 
+        freq: [0.05, 0.06, 0.07],
+        amp: [80, 90, 100],
+        speed: [0.05, 0.06, 0.07],
+        hue: [90, 210, 330],
+        text: "δ波 - 深度睡眠时的低频脑波"
+      },
+      { 
+        freq: [0.06, 0.07, 0.08],
+        amp: [90, 100, 110],
+        speed: [0.06, 0.07, 0.08],
+        hue: [120, 240, 360],
+        text: "γ波 - 高度认知活动时的高频脑波"
+      },
+      { 
+        freq: [0.07, 0.08, 0.09],
+        amp: [100, 110, 120],
+        speed: [0.07, 0.08, 0.09],
+        hue: [150, 270, 30],
+        text: "SMR波 - 感觉运动节律，放松专注状态"
+      },
+      { 
+        freq: [0.08, 0.09, 0.10],
+        amp: [110, 120, 130],
+        speed: [0.08, 0.09, 0.10],
+        hue: [180, 300, 60],
+        text: "Lambda波 - 视觉信息处理时的特殊脑波"
+      },
+      { 
+        freq: [0.09, 0.10, 0.11],
+        amp: [120, 130, 140],
+        speed: [0.09, 0.10, 0.11],
+        hue: [210, 330, 90],
+        text: "Mu波 - 运动抑制时的感觉运动区脑波"
+      },
+      { 
+        freq: [0.10, 0.11, 0.12],
+        amp: [130, 140, 150],
+        speed: [0.10, 0.11, 0.12],
+        hue: [240, 360, 120],
+        text: "Spindle波 - 睡眠纺锤波，阶段2睡眠特征"
+      },
+      { 
+        freq: [0.11, 0.12, 0.13],
+        amp: [140, 150, 160],
+        speed: [0.11, 0.12, 0.13],
+        hue: [270, 30, 150],
+        text: "K-complex - 睡眠中突发的高幅慢波"
+      }
     ];
 
     function setup() {
-      createCanvas(800, 400);
-      colorMode(HSB, 360, 100, 100); // 使用HSB颜色模式实现自然渐变
+      createCanvas(800, 300);
+      colorMode(HSB, 360, 100, 100);
       frameRate(30);
-
-      // 随机选择一种波形
+      // 随机选择波形
       currentWaveform = Math.floor(Math.random() * 10);
       document.getElementById('waveform-number').textContent = currentWaveform + 1;
+      document.getElementById('waveform-text').textContent = presets[currentWaveform].text;
 
-      // 初始化3层动态波形
+      // 初始化波形参数
       for (let i = 0; i < 3; i++) {
         layers.push({
           freq: presets[currentWaveform].freq[i],
@@ -64,30 +141,49 @@
           hue: presets[currentWaveform].hue[i]
         });
       }
+      
     }
 
     function draw() {
       background(0);
       noFill();
 
-      // 绘制3层叠加波形
+      // 绘制三层波形
       layers.forEach((layer, index) => {
         beginShape();
         for (let x = 0; x <= width; x += 5) {
-          // 动态色相：基础色相 + 时间变化 + 位置变化
           let hue = (layer.hue + t * 10 + x * 0.1) % 360;
           stroke(hue, 80, 90);
           strokeWeight(2);
-
-          // 噪声生成更自然的波形
-          let y = height / 2 +
+          
+          let y = height/2 + 
             noise(x * layer.freq + t, index * 100) * layer.amp * 2 - layer.amp;
-
+          
           vertex(x, y);
         }
         endShape();
-        t += layer.speed; // 每层独立速度
+        t += layer.speed;
       });
+    }
+
+    // 添加键盘控制（按空格切换波形）
+    function keyPressed() {
+      if (key === ' ') {
+        currentWaveform = (currentWaveform + 1) % 10;
+        document.getElementById('waveform-number').textContent = currentWaveform + 1;
+        document.getElementById('waveform-text').textContent = presets[currentWaveform].text;
+        
+        // 重置波形参数
+        layers.length = 0;
+        for (let i = 0; i < 3; i++) {
+          layers.push({
+            freq: presets[currentWaveform].freq[i],
+            amp: presets[currentWaveform].amp[i],
+            speed: presets[currentWaveform].speed[i],
+            hue: presets[currentWaveform].hue[i]
+          });
+        }
+      }
     }
   </script>
 </body>
