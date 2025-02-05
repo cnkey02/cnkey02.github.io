@@ -109,7 +109,182 @@
           </ul>
         `
       },
-      // 其他8种波形数据（结构相同）...
+      {
+        title: "θ波 (Theta Wave)",
+        freq: [0.04, 0.05, 0.06],
+        amp: [70, 80, 90],
+        speed: [0.04, 0.05, 0.06],
+        hue: [60, 180, 300],
+        detail: `
+          <strong>科学特征：</strong>
+          <ul>
+            <li>频率范围：4-7 Hz</li>
+            <li>振幅范围：20-100 μV</li>
+            <li>主要区域：颞叶和顶叶</li>
+            <li>出现状态：浅睡、冥想、创造性思维</li>
+          </ul>
+          <strong>临床意义：</strong>
+          <ul>
+            <li>与记忆形成相关</li>
+            <li>过度活跃可能与注意力缺陷有关</li>
+            <li>深度冥想时显著增强</li>
+          </ul>
+        `
+      },
+      {
+        title: "δ波 (Delta Wave)",
+        freq: [0.05, 0.06, 0.07],
+        amp: [80, 90, 100],
+        speed: [0.05, 0.06, 0.07],
+        hue: [90, 210, 330],
+        detail: `
+          <strong>科学特征：</strong>
+          <ul>
+            <li>频率范围：0.5-4 Hz</li>
+            <li>振幅范围：20-200 μV</li>
+            <li>主要区域：全脑分布</li>
+            <li>出现状态：深度睡眠、昏迷</li>
+          </ul>
+          <strong>临床意义：</strong>
+          <ul>
+            <li>反映深度睡眠质量</li>
+            <li>脑损伤患者可能出现异常</li>
+            <li>儿童期较为显著</li>
+          </ul>
+        `
+      },
+      {
+        title: "γ波 (Gamma Wave)",
+        freq: [0.06, 0.07, 0.08],
+        amp: [90, 100, 110],
+        speed: [0.06, 0.07, 0.08],
+        hue: [120, 240, 360],
+        detail: `
+          <strong>科学特征：</strong>
+          <ul>
+            <li>频率范围：30-100 Hz</li>
+            <li>振幅范围：5-20 μV</li>
+            <li>主要区域：全脑分布</li>
+            <li>出现状态：高级认知活动、信息整合</li>
+          </ul>
+          <strong>临床意义：</strong>
+          <ul>
+            <li>与意识体验相关</li>
+            <li>精神分裂症患者可能异常</li>
+            <li>高级冥想者可能增强</li>
+          </ul>
+        `
+      },
+      {
+        title: "SMR波 (Sensorimotor Rhythm)",
+        freq: [0.07, 0.08, 0.09],
+        amp: [100, 110, 120],
+        speed: [0.07, 0.08, 0.09],
+        hue: [150, 270, 30],
+        detail: `
+          <strong>科学特征：</strong>
+          <ul>
+            <li>频率范围：12-15 Hz</li>
+            <li>振幅范围：10-30 μV</li>
+            <li>主要区域：感觉运动皮层</li>
+            <li>出现状态：身体静止、心理放松</li>
+          </ul>
+          <strong>临床意义：</strong>
+          <ul>
+            <li>用于神经反馈训练</li>
+            <li>癫痫患者可能异常</li>
+            <li>ADHD治疗的重要指标</li>
+          </ul>
+        `
+      },
+      {
+        title: "Mu波 (Mu Rhythm)",
+        freq: [0.08, 0.09, 0.10],
+        amp: [110, 120, 130],
+        speed: [0.08, 0.09, 0.10],
+        hue: [180, 300, 60],
+        detail: `
+          <strong>科学特征：</strong>
+          <ul>
+            <li>频率范围：8-12 Hz</li>
+            <li>振幅范围：20-50 μV</li>
+            <li>主要区域：感觉运动皮层</li>
+            <li>出现状态：运动抑制、观察他人运动</li>
+          </ul>
+          <strong>临床意义：</strong>
+          <ul>
+            <li>镜像神经元活动的指标</li>
+            <li>自闭症患者可能异常</li>
+            <li>运动学习的重要标志</li>
+          </ul>
+        `
+      },
+      {
+        title: "Spindle波 (Sleep Spindle)",
+        freq: [0.09, 0.10, 0.11],
+        amp: [120, 130, 140],
+        speed: [0.09, 0.10, 0.11],
+        hue: [210, 330, 90],
+        detail: `
+          <strong>科学特征：</strong>
+          <ul>
+            <li>频率范围：11-16 Hz</li>
+            <li>振幅范围：20-50 μV</li>
+            <li>主要区域：丘脑和皮层</li>
+            <li>出现状态：睡眠第二阶段</li>
+          </ul>
+          <strong>临床意义：</strong>
+          <ul>
+            <li>反映睡眠稳定性</li>
+            <li>与记忆巩固相关</li>
+            <li>老年人可能减少</li>
+          </ul>
+        `
+      },
+      {
+        title: "K-complex波",
+        freq: [0.10, 0.11, 0.12],
+        amp: [130, 140, 150],
+        speed: [0.10, 0.11, 0.12],
+        hue: [240, 360, 120],
+        detail: `
+          <strong>科学特征：</strong>
+          <ul>
+            <li>频率范围：0.5-4 Hz</li>
+            <li>振幅范围：100-400 μV</li>
+            <li>主要区域：全脑分布</li>
+            <li>出现状态：睡眠第二阶段</li>
+          </ul>
+          <strong>临床意义：</strong>
+          <ul>
+            <li>睡眠保护机制</li>
+            <li>与记忆巩固相关</li>
+            <li>睡眠障碍患者可能异常</li>
+          </ul>
+        `
+      },
+      {
+        title: "Lambda波",
+        freq: [0.11, 0.12, 0.13],
+        amp: [140, 150, 160],
+        speed: [0.11, 0.12, 0.13],
+        hue: [270, 30, 150],
+        detail: `
+          <strong>科学特征：</strong>
+          <ul>
+            <li>频率范围：4-6 Hz</li>
+            <li>振幅范围：20-50 μV</li>
+            <li>主要区域：枕叶</li>
+            <li>出现状态：视觉信息处理</li>
+          </ul>
+          <strong>临床意义：</strong>
+          <ul>
+            <li>反映视觉信息处理</li>
+            <li>癫痫患者可能异常</li>
+            <li>视觉障碍诊断指标</li>
+          </ul>
+        `
+      }
     ];
 
     function setup() {
