@@ -47,6 +47,15 @@
       color: #666;
       text-align: center;
     }
+    /* @media (max-width: 840px) {
+    .info-container {
+        width: 95%;
+    }
+    canvas {
+        width: 100%;
+        height: auto;
+    }
+    } */
   </style>
 </head>
 <body>
@@ -56,7 +65,7 @@
     <div class="waveform-detail" id="waveform-detail"></div>
   </div>
   
-  <div class="footer">技术演示 - 脑电波可视化系统 v1.0</div>
+  <!-- <div class="footer">技术演示 - 脑电波可视化系统 v1.0</div> -->
 
   <script>
     let t = 0;
@@ -322,7 +331,7 @@
     function initWaveform() {
       layers.length = 0;
       const preset = presets[currentWaveform];
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 1; i++) {
         layers.push({
           freq: preset.freq[i],
           amp: preset.amp[i],
